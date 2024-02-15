@@ -1,7 +1,14 @@
+import Title from "./componets/Title";
+import "./App.css";
+
 function App() {
   return (
     <>
-      <h1>Hello Word</h1>
+      <main className="container">
+        <Title color="blue" titulo="Hello" />
+        <Title color="red" titulo="Word" />
+        <Title color="black" titulo="Alex" />
+      </main>
     </>
   );
 }
