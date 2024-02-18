@@ -2,43 +2,72 @@ import { useState } from "react";
 
 function App() {
   const [contador, setContador] = useState(0);
+  const [confiStrong, setConfistrong] = useState({
+    color: "green",
+    status: "positive",
+  });
+
   const handleClipIncrementar = () => {
-    setContador((contador) => (contador += 1));
+    setContador((prevContador) => prevContador + 1);
+    confi();
   };
+
   const isImpar = () => {
-    if (contador % 2 == 0) {
-      return true;
-    } else {
-      false;
-    }
+    return contador % 2 !== 0;
   };
+
   const handleClipReset = () => {
     setContador(0);
+    confi();
   };
 
   const handleClipRestar = () => {
-    setContador((contador) => (contador -= 1));
+    setContador((prevContador) => prevContador - 1);
+    confi();
   };
+
+  const confi = () => {
+    if (contador === 0) {
+      setConfistrong({
+        ...confiStrong,
+        color: "green",
+        status: "neutral",
+      });
+    } else if (contador > 0) {
+      setConfistrong({
+        ...confiStrong,
+        color: "green",
+        status: "positive",
+      });
+    } else {
+      setConfistrong({
+        ...confiStrong,
+        color: "red",
+        status: "negative",
+      });
+    }
+  };
+
+  console.table(confiStrong);
 
   return (
     <>
       <header>
-        <h1>Clase_Midu_Dev_hook</h1>
+        <h1>Class_Midu_Dev_hook</h1>
       </header>
       <main className="container">
-        D
         <section>
           <p>{contador}</p>
-          <p>{isImpar() ? "Es par" : "Es impar"}</p>
-          <strong>{contador == 0 ? "comienzo" : ""}</strong>
+          <p>{isImpar() ? "It's odd" : "It's even"}</p>
+          <strong>{contador === 0 ? "Start" : ""}</strong>
           <br />
-          <strong>
-            {contador === 0 ? "" : contador > 0 ? "Positivo" : "negativo"}
+          <strong style={{ background: confiStrong.color }}>
+            {confiStrong.status}
           </strong>
           <br />
-          <button onClick={handleClipIncrementar}>Incrementar</button>
+          <button onClick={handleClipIncrementar}>Increment</button>
           <button onClick={handleClipReset}>Reset</button>
-          <button onClick={handleClipRestar}>Restar</button>
+          <button onClick={handleClipRestar}>Decrement</button>
         </section>
       </main>
     </>
